@@ -3,6 +3,7 @@
 ## Introduction
 
 This plugin adds a whole new level of difficulty to your server!
+This plugin depends on the Plugin Base plugin.
 
 ## Changes to the game
 
@@ -18,4 +19,4 @@ This plugin adds a whole new level of difficulty to your server!
 - Magma slimes will spawn if the player stands near lava
 - No regeneration
 - 30 minute ban after death
-- Enderman give the player blindness and weakness effect upon targeting him
+- Enderman give the player the 'scared' effect
