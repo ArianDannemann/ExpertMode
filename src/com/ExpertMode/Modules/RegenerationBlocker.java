@@ -9,6 +9,7 @@ import org.bukkit.potion.PotionEffectType;
 
 import com.ExpertMode.Main;
 import com.ExpertMode.Module;
+
 public class RegenerationBlocker extends Module {
 
 	public RegenerationBlocker(Main main) {
