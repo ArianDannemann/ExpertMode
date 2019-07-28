@@ -1,0 +1,6 @@
+name: ExpertMode
+main: com.ExpertMode.Main
+version: 1.0
+api-version: 1.13
+depend: [PluginBase]
+commands:
