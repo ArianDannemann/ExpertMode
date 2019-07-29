@@ -14,7 +14,8 @@ public class Main extends JavaPlugin {
 		new MobManipulator(this);
 		new BowTipper(this);
 		new RegenerationBlocker(this);
-		new PlayerBanner(this);
+		//new PlayerBanner(this);
+		new PlayerDeath(this);
 		new BloodMoon(this);
 		new Enderman(this);
 	}

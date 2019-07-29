@@ -30,8 +30,8 @@ public class Enderman extends Module {
 		
 		// Get the player
 		Player player = (Player) event.getTarget();
-		
-		// Apply effect to player
+
+		// Apply scared effect to player
 		new Scared(main, (LivingEntity) player);
 		
 		// Play an enderman scream sound

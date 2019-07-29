@@ -7,6 +7,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Particle;
+import org.bukkit.Sound;
+import org.bukkit.SoundCategory;
 import org.bukkit.World;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -22,6 +24,7 @@ import com.PluginBase.Chat;
 import com.PluginBase.LocationHelper;
 import com.PluginBase.MathHelper;
 import com.PluginBase.ParticleEmitter;
+import com.PluginBase.SoundEmitter;
 import com.PluginBase.TimeHelper;
 
 public class BloodMoon extends Module {
@@ -87,6 +90,17 @@ public class BloodMoon extends Module {
 				
 				// Notify the player of the event
 				Chat.getInstance().sendMessageToPlayer(onlinePlayer, ChatColor.RED + "As the blood moon rises you hear growls nearby");
+				
+				// Play an enderman scream sound
+				SoundEmitter.getInstance().emitSound
+				(
+						onlinePlayer.getWorld(),
+						onlinePlayer.getLocation(), 
+						Sound.ENTITY_ZOMBIE_AMBIENT,
+						SoundCategory.HOSTILE,
+						1,
+						1
+				);
 				
 				// Get the player location
 				Location playerLocation = onlinePlayer.getLocation();
