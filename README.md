@@ -18,5 +18,5 @@ This plugin depends on the Plugin Base plugin.
 - Shipwrecks do not have treasure in them
 - Magma slimes will spawn if the player stands near lava
 - No regeneration
-- 30 minute ban after death
+- 30 minute cooldown after death
 - Enderman give the player the 'scared' effect
