@@ -7,20 +7,25 @@ import com.ExpertMode.Modules.*;
 public class Main extends JavaPlugin {
 	
 	public void onEnable() {
+		// General settings
 		new DifficultySetter(this);
-		new ElytraBlocker(this);
 		new DamageAmplifier(this);
-		new MobManipulator(this);
+
+		// Mechanics
+		new ElytraBlocker(this);
 		new RegenerationBlocker(this);
-		//new PlayerBanner(this);
 		new PlayerDeath(this);
+		
+		// Events
 		new BloodMoon(this);
-		//new Mimic(this);
+		
+		new MobManipulator(this);
 		
 		// Entity related modules
 		new Enderman(this);
 		new MagmaSlime(this);
 		new Skeleton(this);
 		new Zombie(this);
+		new ZombiePigman(this);
 	}
 }
