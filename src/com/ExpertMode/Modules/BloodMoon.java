@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
@@ -85,8 +86,9 @@ public class BloodMoon extends Module {
 		// Loop through all online players
 		for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
 			
-			// Check if player is on the target world
-			if (onlinePlayer.getWorld() == world) {
+			// Check if player is on the target world and in survival
+			if (onlinePlayer.getWorld() == world
+					&& onlinePlayer.getGameMode() == GameMode.SURVIVAL) {
 				
 				// Notify the player of the event
 				Chat.getInstance().sendMessageToPlayer(onlinePlayer, ChatColor.RED + "As the blood moon rises you hear growls nearby");
