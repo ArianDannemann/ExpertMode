@@ -81,9 +81,6 @@ public class PlayerDeath extends Module {
 
 			// Set the players game mode to spectacting
 			player.setGameMode(GameMode.SPECTATOR);
-			
-			// Regulate fly speed so spectators don't generate that much chunks
-			player.setFlySpeed(0.05f);
 		}
 		
 		// Check if the player should be respawned
