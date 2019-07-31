@@ -19,13 +19,12 @@ public class Main extends JavaPlugin {
 		// Events
 		new BloodMoon(this);
 		
-		new MobManipulator(this);
-		
 		// Entity related modules
 		new Enderman(this);
 		new MagmaSlime(this);
 		new Skeleton(this);
 		new Zombie(this);
 		new ZombiePigman(this);
+		new Creeper(this);
 	}
 }

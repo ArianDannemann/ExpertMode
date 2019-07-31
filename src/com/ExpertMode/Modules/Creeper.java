@@ -1,6 +1,5 @@
 package com.ExpertMode.Modules;
 
-import org.bukkit.entity.Creeper;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.EventHandler;
@@ -12,9 +11,9 @@ import org.bukkit.potion.PotionEffectType;
 import com.ExpertMode.Main;
 import com.ExpertMode.Module;
 
-public class MobManipulator extends Module {
+public class Creeper extends Module {
 	
-	public MobManipulator(Main main) {
+	public Creeper(Main main) {
 		super(main);
 	}
 	
