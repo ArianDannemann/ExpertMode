@@ -6,13 +6,10 @@ import com.ExpertMode.Modules.*;
 
 public class Main extends JavaPlugin {
 	
-	// TODO: Make magma slimes stop spawning when there are to many
-	
 	public void onEnable() {
 		new DifficultySetter(this);
 		new ElytraBlocker(this);
 		new DamageAmplifier(this);
-		new Zombifier(this);
 		new MobManipulator(this);
 		new RegenerationBlocker(this);
 		//new PlayerBanner(this);
@@ -23,6 +20,7 @@ public class Main extends JavaPlugin {
 		// Entity related modules
 		new Enderman(this);
 		new MagmaSlime(this);
-		new BowTipper(this);
+		new Skeleton(this);
+		new Zombie(this);
 	}
 }

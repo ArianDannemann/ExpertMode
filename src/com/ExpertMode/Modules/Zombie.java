@@ -3,16 +3,18 @@ package com.ExpertMode.Modules;
 import org.bukkit.World;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
-import org.bukkit.entity.Zombie;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
 import com.ExpertMode.Main;
 import com.ExpertMode.Module;
 
-public class Zombifier extends Module {
+/*
+ * This class will turn players which are killed by zombies into zombies themselves
+ */
+public class Zombie extends Module {
 
-	public Zombifier(Main main) {
+	public Zombie(Main main) {
 		super(main);
 	}
 
@@ -36,7 +38,7 @@ public class Zombifier extends Module {
 		}
 		
 		// Spawn in the zombie
-		Zombie zombie = (Zombie) world.spawnEntity(player.getLocation(), EntityType.ZOMBIE);
+		org.bukkit.entity.Zombie zombie = (org.bukkit.entity.Zombie) world.spawnEntity(player.getLocation(), EntityType.ZOMBIE);
 		
 		// Set the zombie attributes
 		zombie.setCanPickupItems(true);

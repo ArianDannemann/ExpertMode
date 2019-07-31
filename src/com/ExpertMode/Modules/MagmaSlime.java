@@ -7,6 +7,7 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -17,10 +18,16 @@ import com.ExpertMode.Module;
 import com.PluginBase.LocationHelper;
 import com.PluginBase.MathHelper;
 
+/*
+ * This class will spawn magma slimes in lava pools near players
+ */
 public class MagmaSlime extends Module {
 
-	private final int magmaSpawnRange = 10;
-	private final double magmaSpawnChance = 0.1;
+	private final int 
+			magmaSlimeSpawnRange = 10,				// range in which we check for lava near the player
+			maximumNearbyMagmaSlimes = 5,			// maximum amount of magma slimes near the player
+			spawnPeriod = 1200;						// amount of ticks between spawning magma slimes
+	private final double magmaSpawnChance = 0.1;	// chance of magma slime spawning for each lava block
 	
 	public MagmaSlime(Main main) {
 		super(main);
@@ -32,7 +39,27 @@ public class MagmaSlime extends Module {
 				spawnMagmaSlime();
 			}
 		};
-		bukkitRunnable.runTaskTimer(main, 0, 20 * 60);
+		bukkitRunnable.runTaskTimer(main, 0, spawnPeriod);
+	}
+	
+	public int getAmountOfNearbyMagmaSlimes(Player player) {
+		
+		// Prepare an amount to return later
+		int amount = 0;
+		
+		// Loop through all nearby entities
+		for (Entity nearbyEntity : player.getNearbyEntities(magmaSlimeSpawnRange, magmaSlimeSpawnRange, magmaSlimeSpawnRange)) {
+			
+			// Check if entity is a magma slime
+			if (nearbyEntity.getType() == EntityType.MAGMA_CUBE) {
+				
+				// Increase the amount of nearby magma slimes
+				amount++;
+			}
+		}
+		
+		// Return the amount of magma slimes near the player
+		return amount;
 	}
 	
 	public void spawnMagmaSlime() {
@@ -42,24 +69,32 @@ public class MagmaSlime extends Module {
 			
 			// Get all nearby lava blocks
 			List<Block> nearbyLavaBlocks =
-					LocationHelper.getInstance().findNearbyBlocks(
-							onlinePlayer.getLocation(),
-							magmaSpawnRange,
-							Material.LAVA);
+					LocationHelper.getInstance().findNearbyBlocks
+					(
+							onlinePlayer.getLocation(),		// location
+							magmaSlimeSpawnRange,			// range
+							Material.LAVA					// block type
+					);
 			
 			// Loop through all nearby lava blocks
 			for (Block nearbyLavaBlock : nearbyLavaBlocks) {
 				
-				// Check if the 10% (magmaSpawnChance) probability occured
-				if (MathHelper.getInstance().hasChanceHit(magmaSpawnChance)) {
+				// Check if the 10% (magmaSpawnChance) probability occured and how many magma slimes there are nearby
+				if
+				(
+						MathHelper.getInstance().hasChanceHit(magmaSpawnChance)
+						&& getAmountOfNearbyMagmaSlimes(onlinePlayer) < maximumNearbyMagmaSlimes
+				) {
 					
 					// Get the world of the player
 					World world = onlinePlayer.getLocation().getWorld();
 					// Get the spawnLocation
 					Location spawnLocation = 
-							LocationHelper.getInstance().offsetLocation(
+							LocationHelper.getInstance().offsetLocation
+							(
 									nearbyLavaBlock.getLocation(),
-									new Vector(0.5, 0.5, 0.5));
+									new Vector(0.5, 0.5, 0.5)
+							);
 					
 					// Spawn the magma cube
 					world.spawnEntity(spawnLocation, EntityType.MAGMA_CUBE);

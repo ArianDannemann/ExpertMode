@@ -4,7 +4,6 @@ import org.bukkit.World;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
-import org.bukkit.entity.Skeleton;
 import org.bukkit.entity.TippedArrow;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityShootBowEvent;
@@ -15,9 +14,12 @@ import com.ExpertMode.Main;
 import com.ExpertMode.Module;
 import com.PluginBase.MathHelper;
 
-public class BowTipper extends Module {
+/*
+ * This class will tip the bows of skeletons with random potion effects
+ */
+public class Skeleton extends Module {
 
-	public BowTipper(Main main) {
+	public Skeleton(Main main) {
 		super(main);
 	}
 
@@ -33,9 +35,11 @@ public class BowTipper extends Module {
 	public void onEntityShootBow(EntityShootBowEvent event) {
 		
 		// Check if the entity is a skeleton and it's shooting an arrow
-		if (event.getEntity() instanceof Skeleton == false
+		if
+		(		event.getEntity() instanceof Skeleton == false
 				|| event.getEntity() instanceof Player
-				|| event.getProjectile() instanceof Arrow == false) {
+				|| event.getProjectile() instanceof Arrow == false
+		) {
 			return;
 		}
 		
@@ -43,7 +47,7 @@ public class BowTipper extends Module {
 		if (!MathHelper.getInstance().hasChanceHit(chance)) {
 			return;
 		}
-		
+
 		// Get the arrow
 		Arrow arrow = (Arrow) event.getProjectile();
 		// Get the world
