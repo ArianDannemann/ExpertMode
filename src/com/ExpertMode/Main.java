@@ -6,6 +6,9 @@ import com.ExpertMode.Modules.*;
 
 public class Main extends JavaPlugin {
 	
+	// TODO: Make magma slimes stop spawning when there are to many
+	// TODO: Dont spawn blood moon enemies on spectators and creatives
+	
 	public void onEnable() {
 		new DifficultySetter(this);
 		new ElytraBlocker(this);
@@ -18,5 +21,6 @@ public class Main extends JavaPlugin {
 		new PlayerDeath(this);
 		new BloodMoon(this);
 		new Enderman(this);
+		//new Mimic(this);
 	}
 }
