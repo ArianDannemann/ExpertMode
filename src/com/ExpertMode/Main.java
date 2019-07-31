@@ -26,5 +26,6 @@ public class Main extends JavaPlugin {
 		new Zombie(this);
 		new ZombiePigman(this);
 		new Creeper(this);
+		new Phantom(this);
 	}
 }

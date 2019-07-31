@@ -11,6 +11,9 @@ import org.bukkit.potion.PotionEffectType;
 import com.ExpertMode.Main;
 import com.ExpertMode.Module;
 
+/*
+ * This class will make creepers much faster
+ */
 public class Creeper extends Module {
 	
 	public Creeper(Main main) {
