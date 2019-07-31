@@ -14,12 +14,15 @@ public class Main extends JavaPlugin {
 		new DamageAmplifier(this);
 		new Zombifier(this);
 		new MobManipulator(this);
-		new BowTipper(this);
 		new RegenerationBlocker(this);
 		//new PlayerBanner(this);
 		new PlayerDeath(this);
 		new BloodMoon(this);
-		new Enderman(this);
 		//new Mimic(this);
+		
+		// Entity related modules
+		new Enderman(this);
+		new MagmaSlime(this);
+		new BowTipper(this);
 	}
 }
