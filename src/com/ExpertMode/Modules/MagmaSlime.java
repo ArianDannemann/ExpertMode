@@ -48,7 +48,7 @@ public class MagmaSlime extends Module {
 		int amount = 0;
 		
 		// Loop through all nearby entities
-		for (Entity nearbyEntity : player.getNearbyEntities(magmaSlimeSpawnRange, magmaSlimeSpawnRange, magmaSlimeSpawnRange)) {
+		for (Entity nearbyEntity : player.getNearbyEntities(magmaSlimeSpawnRange * 2, magmaSlimeSpawnRange, magmaSlimeSpawnRange * 2)) {
 			
 			// Check if entity is a magma slime
 			if (nearbyEntity.getType() == EntityType.MAGMA_CUBE) {
@@ -75,29 +75,29 @@ public class MagmaSlime extends Module {
 							magmaSlimeSpawnRange,			// range
 							Material.LAVA					// block type
 					);
-			
-			// Loop through all nearby lava blocks
-			for (Block nearbyLavaBlock : nearbyLavaBlocks) {
-				
-				// Check if the 10% (magmaSpawnChance) probability occured and how many magma slimes there are nearby
-				if
-				(
-						MathHelper.getInstance().hasChanceHit(magmaSpawnChance)
-						&& getAmountOfNearbyMagmaSlimes(onlinePlayer) < maximumNearbyMagmaSlimes
-				) {
-					
-					// Get the world of the player
-					World world = onlinePlayer.getLocation().getWorld();
-					// Get the spawnLocation
-					Location spawnLocation = 
-							LocationHelper.getInstance().offsetLocation
-							(
-									nearbyLavaBlock.getLocation(),
-									new Vector(0.5, 0.5, 0.5)
-							);
-					
-					// Spawn the magma cube
-					world.spawnEntity(spawnLocation, EntityType.MAGMA_CUBE);
+
+			// Check if there is space for more magma slimes
+			if (getAmountOfNearbyMagmaSlimes(onlinePlayer) < maximumNearbyMagmaSlimes) {
+
+				// Loop through all nearby lava blocks
+				for (Block nearbyLavaBlock : nearbyLavaBlocks) {
+
+					// Check if the 10% (magmaSpawnChance) probability occured
+					if (MathHelper.getInstance().hasChanceHit(magmaSpawnChance)) {
+
+						// Get the world of the player
+						World world = onlinePlayer.getLocation().getWorld();
+						// Get the spawnLocation
+						Location spawnLocation = 
+								LocationHelper.getInstance().offsetLocation
+								(
+										nearbyLavaBlock.getLocation(),
+										new Vector(0.5, 0.5, 0.5)
+								);
+
+						// Spawn the magma cube
+						world.spawnEntity(spawnLocation, EntityType.MAGMA_CUBE);
+					}
 				}
 			}
 		}
