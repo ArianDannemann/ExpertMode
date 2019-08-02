@@ -26,8 +26,8 @@ public class PlayerDeath extends Module {
 
 	private final int cooldownDuration = 36000; // 30 minutes
 	
-	private List<String> deadPlayers = new ArrayList<>();
-	private HashMap<String, Location> respawnedPlayers = new HashMap<>();
+	List<String> deadPlayers = new ArrayList<>();
+	HashMap<String, Location> respawnedPlayers = new HashMap<>();
 	
 	@EventHandler
 	public void onPlayerDeath(PlayerRespawnEvent event) {
@@ -39,7 +39,7 @@ public class PlayerDeath extends Module {
 		String playerName = player.getName();
 		
 		// Add the player name to the list of dead players
-		deadPlayers.add(playerName);
+		this.deadPlayers.add(playerName);
 		
 		// Get the location where the player respawned
 		Location playerRespawnLocation = event.getRespawnLocation();
@@ -59,13 +59,13 @@ public class PlayerDeath extends Module {
 			public void run() {
 				
 				// Remove the player from the list of dead players
-				deadPlayers.remove(playerName);
+				PlayerDeath.this.deadPlayers.remove(playerName);
 				
 				// Add the player from the list of respawned players
-				respawnedPlayers.put(playerName, playerRespawnLocation);
+				PlayerDeath.this.respawnedPlayers.put(playerName, playerRespawnLocation);
 			}
 		};
-		runnable.runTaskLater(main, cooldownDuration);
+		runnable.runTaskLater(this.main, this.cooldownDuration);
 	}
 	
 	@EventHandler
@@ -77,23 +77,23 @@ public class PlayerDeath extends Module {
 		String playerName = player.getName();
 
 		// Check if the player is on cooldown
-		if (deadPlayers.contains(playerName)) {
+		if (this.deadPlayers.contains(playerName)) {
 
 			// Set the players game mode to spectacting
 			player.setGameMode(GameMode.SPECTATOR);
 		}
 		
 		// Check if the player should be respawned
-		if (respawnedPlayers.containsKey(playerName)) {
+		if (this.respawnedPlayers.containsKey(playerName)) {
 			
 			// Set the players game mode to survival
 			player.setGameMode(GameMode.SURVIVAL);
 			
 			// Teleport the player back to his respawn location
-			player.teleport(respawnedPlayers.get(playerName));
+			player.teleport(this.respawnedPlayers.get(playerName));
 			
 			// Remove the player from the respawn list
-			respawnedPlayers.remove(playerName);
+			this.respawnedPlayers.remove(playerName);
 			
 			// Notify the player about respawning
 			Chat.getInstance().broadcastMessage(player.getName() + " has respawned");
@@ -109,7 +109,7 @@ public class PlayerDeath extends Module {
 		String playerName = player.getName();
 
 		// Get if the joining player is dead
-		if (!deadPlayers.contains(playerName)) {
+		if (!this.deadPlayers.contains(playerName)) {
 			return;
 		}
 		

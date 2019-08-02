@@ -3,7 +3,6 @@ package com.ExpertMode.Modules;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
@@ -19,6 +18,7 @@ public class Enderman extends Module {
 		super(main);
 	}
 	
+	@SuppressWarnings("unused")
 	@EventHandler
 	private void onEntityTarget(EntityTargetLivingEntityEvent event) {
 		
@@ -32,7 +32,7 @@ public class Enderman extends Module {
 		Player player = (Player) event.getTarget();
 
 		// Apply scared effect to player
-		new ScaredEffect(main, (LivingEntity) player);
+		new ScaredEffect(this.main, player);
 		
 		// Play an enderman scream sound
 		SoundEmitter.getInstance().emitSound

@@ -24,7 +24,7 @@ public class DamageAmplifier extends Module {
 		}
 		
 		// Calculate the amplified damage
-		float amplifiedDamage = (float) ((int) event.getDamage() * amplifier);
+		float amplifiedDamage = (int) event.getDamage() * this.amplifier;
 		
 		// Set the amplified damage
 		event.setDamage(amplifiedDamage);

@@ -34,7 +34,7 @@ public class ZombiePigman extends Module {
 				aggravateZombiePigmen();
 			}
 		};
-		bukkitRunnable.runTaskTimer(main, 0, aggrovationPeriod);
+		bukkitRunnable.runTaskTimer(main, 0, this.aggrovationPeriod);
 	}
 	
 	public void aggravateZombiePigmen() {
@@ -43,11 +43,11 @@ public class ZombiePigman extends Module {
 		for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
 
 			// Check if the possibility hit
-			if (!MathHelper.getInstance().hasChanceHit(aggravateZombiePigmenChange)) {
+			if (!MathHelper.getInstance().hasChanceHit(this.aggravateZombiePigmenChange)) {
 				return;
 			}
 			// Loop through nearby mobs
-			for (Entity nearbyEntity : onlinePlayer.getNearbyEntities(aggravateZombiePigmenRange, aggravateZombiePigmenRange, aggravateZombiePigmenRange)) {
+			for (Entity nearbyEntity : onlinePlayer.getNearbyEntities(this.aggravateZombiePigmenRange, this.aggravateZombiePigmenRange, this.aggravateZombiePigmenRange)) {
 
 				// Check if the entity is a zombie pigman
 				if (nearbyEntity.getType() == EntityType.PIG_ZOMBIE) {

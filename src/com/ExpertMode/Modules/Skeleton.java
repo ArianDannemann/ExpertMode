@@ -25,7 +25,8 @@ public class Skeleton extends Module {
 
 	private final int chance = 10;
 	
-	private final PotionType[] possiblePotionTypes = new PotionType[] {
+	private final PotionType[] possiblePotionTypes = new PotionType[] 
+	{
 			PotionType.SLOWNESS,
 			PotionType.POISON,
 			PotionType.WEAKNESS,
@@ -44,7 +45,7 @@ public class Skeleton extends Module {
 		}
 		
 		// Check if the event should occur
-		if (!MathHelper.getInstance().hasChanceHit(chance)) {
+		if (!MathHelper.getInstance().hasChanceHit(this.chance)) {
 			return;
 		}
 
@@ -62,8 +63,11 @@ public class Skeleton extends Module {
 		// Remove the normal arrow
 		arrow.remove();
 		
+		// Choose a random index in the bound of possiblePotionTypes
+		int potionTypeIndex = MathHelper.getInstance().getRandom().nextInt(this.possiblePotionTypes.length);
+		
 		// Choose a random potionType
-		PotionType potionType = possiblePotionTypes[MathHelper.getInstance().getRandom().nextInt(possiblePotionTypes.length)];
+		PotionType potionType = this.possiblePotionTypes[potionTypeIndex];
 		
 		// Create the potion effect
 		PotionData potionData = new PotionData(potionType);

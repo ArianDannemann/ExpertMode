@@ -39,7 +39,7 @@ public class MagmaSlime extends Module {
 				spawnMagmaSlime();
 			}
 		};
-		bukkitRunnable.runTaskTimer(main, 0, spawnPeriod);
+		bukkitRunnable.runTaskTimer(main, 0, this.spawnPeriod);
 	}
 	
 	public int getAmountOfNearbyMagmaSlimes(Player player) {
@@ -48,7 +48,7 @@ public class MagmaSlime extends Module {
 		int amount = 0;
 		
 		// Loop through all nearby entities
-		for (Entity nearbyEntity : player.getNearbyEntities(magmaSlimeSpawnRange * 2, magmaSlimeSpawnRange, magmaSlimeSpawnRange * 2)) {
+		for (Entity nearbyEntity : player.getNearbyEntities(this.magmaSlimeSpawnRange * 2, this.magmaSlimeSpawnRange, this.magmaSlimeSpawnRange * 2)) {
 			
 			// Check if entity is a magma slime
 			if (nearbyEntity.getType() == EntityType.MAGMA_CUBE) {
@@ -72,18 +72,18 @@ public class MagmaSlime extends Module {
 					LocationHelper.getInstance().findNearbyBlocks
 					(
 							onlinePlayer.getLocation(),		// location
-							magmaSlimeSpawnRange,			// range
+							this.magmaSlimeSpawnRange,			// range
 							Material.LAVA					// block type
 					);
 
 			// Check if there is space for more magma slimes
-			if (getAmountOfNearbyMagmaSlimes(onlinePlayer) < maximumNearbyMagmaSlimes) {
+			if (getAmountOfNearbyMagmaSlimes(onlinePlayer) < this.maximumNearbyMagmaSlimes) {
 
 				// Loop through all nearby lava blocks
 				for (Block nearbyLavaBlock : nearbyLavaBlocks) {
 
 					// Check if the 10% (magmaSpawnChance) probability occured
-					if (MathHelper.getInstance().hasChanceHit(magmaSpawnChance)) {
+					if (MathHelper.getInstance().hasChanceHit(this.magmaSpawnChance)) {
 
 						// Get the world of the player
 						World world = onlinePlayer.getLocation().getWorld();

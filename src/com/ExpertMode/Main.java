@@ -8,7 +8,10 @@ public class Main extends JavaPlugin {
 	
 	// TODO: if one mob gets angry at the player, all nearby mobs do the same
 	
+	@SuppressWarnings("unused")
+	@Override
 	public void onEnable() {
+		
 		// General settings
 		new DifficultySetter(this);
 		new DamageAmplifier(this);
@@ -29,5 +32,6 @@ public class Main extends JavaPlugin {
 		new ZombiePigman(this);
 		new Creeper(this);
 		new Phantom(this);
+		new Drowned(this);
 	}
 }

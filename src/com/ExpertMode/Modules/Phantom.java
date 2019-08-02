@@ -50,7 +50,7 @@ public class Phantom extends Module {
 				1,
 				0,
 				new Vector(0.25, 0.25, 0.25),
-				main,
+				this.main,
 				0,
 				2,
 				1000000

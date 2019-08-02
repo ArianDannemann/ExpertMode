@@ -36,7 +36,7 @@ public class BloodMoon extends Module {
 		checkForNight();
 	}
 	
-	private List<World> checkedWorlds = new ArrayList<>();
+	List<World> checkedWorlds = new ArrayList<>();
 	
 	private final int 
 			chance = 5,						// chance of a blood moon appear per night (in %)
@@ -60,28 +60,28 @@ public class BloodMoon extends Module {
 					World world = onlinePlayer.getWorld();
 
 					// Check if it's night for the player
-					if (!checkedWorlds.contains(world)
+					if (!BloodMoon.this.checkedWorlds.contains(world)
 							&& TimeHelper.getInstance().isNight(world)) {
 
 						// Check if it should be a blood moon
-						if (MathHelper.getInstance().hasChanceHit(chance)) {
+						if (MathHelper.getInstance().hasChanceHit(BloodMoon.this.chance)) {
 							runBloodMoon(world);
 						}
 
 						// Add the world to a list of worlds as to not check it again
-						checkedWorlds.add(world);
+						BloodMoon.this.checkedWorlds.add(world);
 					}
 					else if (!TimeHelper.getInstance().isNight(world)) {
 						// Remove the world from the list of checked worlds so it will be checked next night
-						checkedWorlds.remove(world);
+						BloodMoon.this.checkedWorlds.remove(world);
 					}
 				}
 			}
 		};
-		runnable.runTaskTimer(main, 20, 200);
+		runnable.runTaskTimer(this.main, 20, 200);
 	}
 	
-	private void runBloodMoon(World world) {
+	void runBloodMoon(World world) {
 		
 		// Loop through all online players
 		for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
@@ -110,13 +110,13 @@ public class BloodMoon extends Module {
 				Location herdLocation = playerLocation;
 				
 				// Generate a random spawn location for the herd of zombies
-				herdLocation = LocationHelper.getInstance().getRandomNearbyPosition(playerLocation, herdMinimumDistance, herdMaximumDistance);
+				herdLocation = LocationHelper.getInstance().getRandomNearbyPosition(playerLocation, this.herdMinimumDistance, this.herdMaximumDistance);
 				
 				// It should spawn 10 zombies
-				for (int i = 0; i <= zombieAmount; i++) {
+				for (int i = 0; i <= this.zombieAmount; i++) {
 					
 					// Generate random location near where the herd spawns
-					Location spawnLocation = LocationHelper.getInstance().getRandomNearbyPosition(herdLocation, zombieMaximumDistance);
+					Location spawnLocation = LocationHelper.getInstance().getRandomNearbyPosition(herdLocation, this.zombieMaximumDistance);
 					
 					// Spawn in a zombie
 					Zombie zombie = (Zombie) world.spawnEntity(spawnLocation, EntityType.ZOMBIE);
