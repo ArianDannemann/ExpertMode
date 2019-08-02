@@ -6,6 +6,8 @@ import com.ExpertMode.Modules.*;
 
 public class Main extends JavaPlugin {
 	
+	// TODO: if one mob gets angry at the player, all nearby mobs do the same
+	
 	public void onEnable() {
 		// General settings
 		new DifficultySetter(this);
