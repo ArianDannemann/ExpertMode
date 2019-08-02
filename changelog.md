@@ -1,3 +1,7 @@
+# Version 1.2
+
+- Drowned will now pull the player down if he's in a 5 block radius (both the drowned and the player have to be in water for this to work)
+
 # Version 1.1
 
 - Added 'Scared' effect whenever a player is targeted by an enderman
