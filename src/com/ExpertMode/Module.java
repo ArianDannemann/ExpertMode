@@ -11,5 +11,4 @@ public abstract class Module implements Listener {
 		this.main = main;
 		Bukkit.getServer().getPluginManager().registerEvents(this, main);
 	}
-	
 }

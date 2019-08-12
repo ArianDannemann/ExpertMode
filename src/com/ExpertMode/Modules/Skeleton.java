@@ -3,7 +3,6 @@ package com.ExpertMode.Modules;
 import org.bukkit.World;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Player;
 import org.bukkit.entity.TippedArrow;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityShootBowEvent;
@@ -23,7 +22,7 @@ public class Skeleton extends Module {
 		super(main);
 	}
 
-	private final int chance = 10;
+	private final int chance = 100;
 	
 	private final PotionType[] possiblePotionTypes = new PotionType[] 
 	{
@@ -37,14 +36,14 @@ public class Skeleton extends Module {
 		
 		// Check if the entity is a skeleton and it's shooting an arrow
 		if
-		(		event.getEntity() instanceof Skeleton == false
-				|| event.getEntity() instanceof Player
-				|| event.getProjectile() instanceof Arrow == false
+		(		
+				event.getEntity().getType() != EntityType.SKELETON
+				|| event.getProjectile().getType() != EntityType.ARROW
 		) {
 			return;
 		}
 		
-		// Check if the event should occur
+		// Check if the event should occure
 		if (!MathHelper.getInstance().hasChanceHit(this.chance)) {
 			return;
 		}

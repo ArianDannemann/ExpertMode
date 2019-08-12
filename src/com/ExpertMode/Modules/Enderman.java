@@ -20,7 +20,7 @@ public class Enderman extends Module {
 	
 	@SuppressWarnings("unused")
 	@EventHandler
-	private void onEntityTarget(EntityTargetLivingEntityEvent event) {
+	private void onEntityTargetLivingEntity(EntityTargetLivingEntityEvent event) {
 		
 		// Check if an enderman targets a player
 		if (event.getEntity().getType() != EntityType.ENDERMAN
