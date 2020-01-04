@@ -1,6 +1,13 @@
+# Version 1.2.1
+
+- Added darkness effect whenever the player moves around while not under blocks at night
+- Added jump scares
+- Temporarily removed Skeletons ability to shoot tipped arrows
+
 # Version 1.2
 
 - Drowned will now pull the player down if he's in a 5 block radius (both the drowned and the player have to be in water for this to work)
+- There is now a 'blood' effect when taking damage
 
 # Version 1.1
 

@@ -3,18 +3,21 @@ package com.ExpertMode;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.ExpertMode.Modules.*;
+import com.PluginBase.VersionChecker;
 
 public class Main extends JavaPlugin {
-	
-	// TODO: if one mob gets angry at the player, all nearby mobs do the same
 	
 	@SuppressWarnings("unused")
 	@Override
 	public void onEnable() {
 		
+		// Check if we are using the correct plugin base version
+		VersionChecker.getInstance().checkVersion(this, "1.2");
+		
 		// General settings
 		new DifficultySetter(this);
 		new DamageAmplifier(this);
+		new PlayerHurt(this);
 
 		// Mechanics
 		new ElytraBlocker(this);
@@ -27,11 +30,15 @@ public class Main extends JavaPlugin {
 		// Entity related modules
 		new Enderman(this);
 		new MagmaSlime(this);
-		new Skeleton(this);
+		//new Skeleton(this);
 		new Zombie(this);
 		new ZombiePigman(this);
 		new Creeper(this);
 		new Phantom(this);
 		new Drowned(this);
+		
+		// Mixed stuff to mess with the player
+		new DarkerNight(this);
+		new JumpScare(this);
 	}
 }
