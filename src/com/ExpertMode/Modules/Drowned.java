@@ -120,6 +120,26 @@ public class Drowned extends Module {
 						1,								// volume
 						1								// pitch
 				);
+				
+				// Player some water splash effect at the drowneds position
+				ParticleEmitter.getInstance().emitParticles
+				(
+						world,							// world
+						entity.getLocation(),			// location
+						Particle.WATER_BUBBLE,			// particle
+						50,								// amount
+						0,								// speed
+						new Vector(2, 1, 2)			// spread
+				);
+				ParticleEmitter.getInstance().emitParticles
+				(
+						world,							// world
+						entity.getLocation(),			// location
+						Particle.WATER_WAKE,			// particle
+						50,								// amount
+						0,								// speed
+						new Vector(2, 1, 2)			// spread
+				);
 			}
 		}
 	}

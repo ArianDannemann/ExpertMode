@@ -7,6 +7,11 @@ import com.PluginBase.VersionChecker;
 
 public class Main extends JavaPlugin {
 	
+	/*
+	 * Make wolfs randomly attack player
+	 * Make skeleton switch to sword when in close combat
+	 */
+	
 	@SuppressWarnings("unused")
 	@Override
 	public void onEnable() {
@@ -36,6 +41,7 @@ public class Main extends JavaPlugin {
 		new Creeper(this);
 		new Phantom(this);
 		new Drowned(this);
+		new Wolf(this);
 		
 		// Mixed stuff to mess with the player
 		new DarkerNight(this);

@@ -8,6 +8,7 @@
 - Added darkness effect whenever the player moves around while not under blocks at night
 - Added jump scares
 - Temporarily removed Skeletons ability to shoot tipped arrows
+- Wolfs will now randomly attack nearby players
 
 # Version 1.1
 
