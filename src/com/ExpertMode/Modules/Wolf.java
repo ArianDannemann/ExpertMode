@@ -18,14 +18,13 @@ import com.PluginBase.SoundEmitter;
  */
 public class Wolf extends Module {
 
-	private final int 
-			aggravateWolfRange = 15,					// range from the player in which wolfs will become aggresive
-			aggravationPeriod = 1200;					// amount of ticks between chance of aggravation
-	private final double aggravateWolfChange = 30;		// chance of wolfs becoming aggresive
-	
+	private final int aggravateWolfRange = 15, // range from the player in which wolfs will become aggresive
+			aggravationPeriod = 1200; // amount of ticks between chance of aggravation
+	private final double aggravateWolfChange = 30; // chance of wolfs becoming aggresive
+
 	public Wolf(Main main) {
 		super(main);
-		
+
 		// Start a timer that runs once every minute
 		BukkitRunnable bukkitRunnable = new BukkitRunnable() {
 			@Override
@@ -35,7 +34,7 @@ public class Wolf extends Module {
 		};
 		bukkitRunnable.runTaskTimer(main, 0, this.aggravationPeriod);
 	}
-	
+
 	public void aggravateWolfs() {
 
 		// Loop through all the players
@@ -45,28 +44,27 @@ public class Wolf extends Module {
 			if (!MathHelper.getInstance().hasChanceHit(this.aggravateWolfChange)) {
 				return;
 			}
-			
+
 			// Loop through nearby mobs
-			for (Entity nearbyEntity : onlinePlayer.getNearbyEntities(this.aggravateWolfRange, this.aggravateWolfRange, this.aggravateWolfRange)) {
+			for (Entity nearbyEntity : onlinePlayer.getNearbyEntities(this.aggravateWolfRange, this.aggravateWolfRange,
+					this.aggravateWolfRange)) {
 
 				// Check if the entity is a zombie pigman
 				if (nearbyEntity.getType() == EntityType.WOLF) {
 
 					// Get the wolf
 					org.bukkit.entity.Wolf wolf = (org.bukkit.entity.Wolf) nearbyEntity;
-					
+
 					// Make the wolf attack the player
 					wolf.setTarget(onlinePlayer);
-					
+
 					// Play an angry sound at the location of the zombie pigman
-					SoundEmitter.getInstance().emitSound
-					(
-							onlinePlayer.getLocation().getWorld(),		// world
-							wolf.getLocation(),							// location
-							Sound.ENTITY_ZOMBIE_PIGMAN_ANGRY,			// sound
-							SoundCategory.HOSTILE,						// sound category
-							1,											// volume
-							1											// pitch
+					SoundEmitter.getInstance().emitSound(onlinePlayer.getLocation().getWorld(), // world
+							wolf.getLocation(), // location
+							Sound.ENTITY_WOLF_GROWL, // sound
+							SoundCategory.HOSTILE, // sound category
+							1, // volume
+							1 // pitch
 					);
 				}
 			}

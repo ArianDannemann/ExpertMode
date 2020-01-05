@@ -1,28 +1,64 @@
 package com.ExpertMode.Modules;
 
-import org.bukkit.World;
-import org.bukkit.entity.Arrow;
+import org.bukkit.Bukkit;
+import org.bukkit.Material;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.TippedArrow;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.entity.EntityShootBowEvent;
-import org.bukkit.potion.PotionData;
-import org.bukkit.potion.PotionType;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import com.ExpertMode.Main;
 import com.ExpertMode.Module;
-import com.PluginBase.MathHelper;
 
 /*
  * This class will tip the bows of skeletons with random potion effects
  */
 public class Skeleton extends Module {
 
+	private final int 
+			updatePeriod = 40, 					// the period at which we check if the player is near a skeleton
+			skeletonWeaponChangeRange = 5;		// the range at which a skeleton will change to a sword as a weapon
+	
 	public Skeleton(Main main) {
 		super(main);
+		
+		BukkitRunnable bukkitRunnable = new BukkitRunnable() {
+			@Override
+			public void run() {
+				updateSkeletonWeapon();
+			}
+		};
+		bukkitRunnable.runTaskTimer(main, 0, this.updatePeriod);
 	}
 
-	private final int chance = 100;
+	public void updateSkeletonWeapon() {
+		// Loop through all the players
+		for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
+
+			// Loop through nearby mobs
+			for (Entity nearbyEntity : onlinePlayer.getNearbyEntities(this.skeletonWeaponChangeRange * 3,
+					this.skeletonWeaponChangeRange * 3, this.skeletonWeaponChangeRange * 3)) {
+
+				// Check if the entity is a skeleton
+				if (nearbyEntity.getType() == EntityType.SKELETON) {
+
+					// Get the skeleton
+					org.bukkit.entity.Skeleton skeleton = (org.bukkit.entity.Skeleton) nearbyEntity;
+
+					if (nearbyEntity.getLocation().distance(onlinePlayer.getLocation()) > this.skeletonWeaponChangeRange) {
+						if (skeleton.getEquipment().getItemInMainHand().getType() == Material.STONE_SWORD) {
+							skeleton.getEquipment().setItemInMainHand(new ItemStack(Material.BOW));
+						}
+					} else {
+						skeleton.getEquipment().setItemInMainHand(new ItemStack(Material.STONE_SWORD));
+					}
+				}
+			}
+		}
+	}
+
+	/*private final int chance = 100;
 	
 	private final PotionType[] possiblePotionTypes = new PotionType[] 
 	{
@@ -73,5 +109,7 @@ public class Skeleton extends Module {
 		
 		// Apply the potion effect
 		tippedArrow.setBasePotionData(potionData);
-	}
+	}*/
+	
+	
 }

@@ -9,6 +9,7 @@
 - Added jump scares
 - Temporarily removed Skeletons ability to shoot tipped arrows
 - Wolfs will now randomly attack nearby players
+- Skeletons will now change their weapon to stone swords when close to a player
 
 # Version 1.1
 
