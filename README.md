@@ -26,7 +26,7 @@ This plugin depends on the Plugin Base plugin.
 
 - Elytra don't work at night or during a storm
 - There is no natural regeneration
-- When a player dies, they will reieve a 30 minute cooldown
+- When a player dies, they will receive a 30 minute cooldown
 
 ### Events
 
