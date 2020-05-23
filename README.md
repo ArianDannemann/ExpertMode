@@ -18,7 +18,7 @@ This plugin depends on the Plugin Base plugin.
 - Magma slimes will spawn in lava blocks if the player is near enough
 - Skeletons can switch to a stone sword in close combat
 - Enderman 'scare' the player
-- If a player is killed by a zombie, his body becomes a zombie taking over the name and equipment from the player
+- If a player is killed by a zombie, their body becomes a zombie taking over the name and equipment from the player
 - Zombie pigmen attack players randomly
 - Wolfs attack players randomly
 - Phantoms are now invisible, leaving only a trail of particles behind
@@ -28,7 +28,7 @@ This plugin depends on the Plugin Base plugin.
 
 - Elytra don't work at night or during a storm
 - There is no natural regeneration
-- When a player dies, he will reviece a 30 minute cooldown
+- When a player dies, he will receive a 30 minute cooldown
 - Darkness effect whenever the player moves around while not under blocks at night
 
 ### Events
