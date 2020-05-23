@@ -2,6 +2,8 @@
 
 - Drowned will now pull the player down if he's in a 5 block radius (both the drowned and the player have to be in water for this to work)
 - There is now a 'blood' effect when taking damage
+- Squids now explode when a player is nearby
+- Creepers will now spawn a lingering potion effect of poison when exploding
 
 ## Version 1.2.1
 

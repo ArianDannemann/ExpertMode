@@ -32,27 +32,26 @@ public class BloodMoon extends Module {
 
 	public BloodMoon(Main main) {
 		super(main);
-		
+
 		checkForNight();
 	}
-	
+
 	List<World> checkedWorlds = new ArrayList<>();
-	
-	private final int 
-			chance = 5,						// chance of a blood moon appear per night (in %)
-			herdMinimumDistance = 15,		// minimum amount of blocks the herd has to spawn away from the nearest player
-			herdMaximumDistance = 25,		// maximum amount of blocks the herd may spawn away from the player
-			zombieMaximumDistance = 5,		// maximum amount of blocks a zombie may spawn away from the herd
-			zombieAmount = 10;				// amount of zombies per herd
+
+	private final int chance = 5, // chance of a blood moon appear per night (in %)
+			herdMinimumDistance = 15, // minimum amount of blocks the herd has to spawn away from the nearest player
+			herdMaximumDistance = 25, // maximum amount of blocks the herd may spawn away from the player
+			zombieMaximumDistance = 5, // maximum amount of blocks a zombie may spawn away from the herd
+			zombieAmount = 10; // amount of zombies per herd
 	
 	private void checkForNight() {
-		
+
 		// Runnable that will check all players worlds every 10 seconds
 		BukkitRunnable runnable = new BukkitRunnable() {
-			
+
 			@Override
 			public void run() {
-				
+
 				// Loop through all online players
 				for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
 
@@ -60,8 +59,7 @@ public class BloodMoon extends Module {
 					World world = onlinePlayer.getWorld();
 
 					// Check if it's night for the player
-					if (!BloodMoon.this.checkedWorlds.contains(world)
-							&& TimeHelper.getInstance().isNight(world)) {
+					if (!BloodMoon.this.checkedWorlds.contains(world) && TimeHelper.getInstance().isNight(world)) {
 
 						// Check if it should be a blood moon
 						if (MathHelper.getInstance().hasChanceHit(BloodMoon.this.chance)) {
@@ -70,9 +68,9 @@ public class BloodMoon extends Module {
 
 						// Add the world to a list of worlds as to not check it again
 						BloodMoon.this.checkedWorlds.add(world);
-					}
-					else if (!TimeHelper.getInstance().isNight(world)) {
-						// Remove the world from the list of checked worlds so it will be checked next night
+					} else if (!TimeHelper.getInstance().isNight(world)) {
+						// Remove the world from the list of checked worlds so it will be checked next
+						// night
 						BloodMoon.this.checkedWorlds.remove(world);
 					}
 				}
@@ -80,56 +78,52 @@ public class BloodMoon extends Module {
 		};
 		runnable.runTaskTimer(this.main, 20, 200);
 	}
-	
+
 	void runBloodMoon(World world) {
-		
+
 		// Loop through all online players
 		for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
-			
+
 			// Check if player is on the target world and in survival
-			if (onlinePlayer.getWorld() == world
-					&& onlinePlayer.getGameMode() == GameMode.SURVIVAL) {
-				
+			if (onlinePlayer.getWorld() == world && onlinePlayer.getGameMode() == GameMode.SURVIVAL) {
+
 				// Notify the player of the event
-				Chat.getInstance().sendMessageToPlayer(onlinePlayer, ChatColor.RED + "As the blood moon rises you hear growls nearby");
-				
+				Chat.getInstance().sendMessageToPlayer(onlinePlayer,
+						ChatColor.RED + "As the blood moon rises you hear growls nearby");
+
 				// Play an enderman scream sound
-				SoundEmitter.getInstance().emitSound
-				(
-						onlinePlayer.getWorld(),
-						onlinePlayer.getLocation(), 
-						Sound.ENTITY_ZOMBIE_AMBIENT,
-						SoundCategory.HOSTILE,
-						1,
-						1
-				);
-				
+				SoundEmitter.getInstance().emitSound(onlinePlayer.getWorld(), onlinePlayer.getLocation(),
+						Sound.ENTITY_ZOMBIE_AMBIENT, SoundCategory.HOSTILE, 1, 1);
+
 				// Get the player location
 				Location playerLocation = onlinePlayer.getLocation();
 				// Prepare a spawn location for the zombie
 				Location herdLocation = playerLocation;
-				
+
 				// Generate a random spawn location for the herd of zombies
-				herdLocation = LocationHelper.getInstance().getRandomNearbyPosition(playerLocation, this.herdMinimumDistance, this.herdMaximumDistance);
-				
+				herdLocation = LocationHelper.getInstance().getRandomNearbyPosition(playerLocation,
+						this.herdMinimumDistance, this.herdMaximumDistance);
+
 				// It should spawn 10 zombies
 				for (int i = 0; i <= this.zombieAmount; i++) {
-					
+
 					// Generate random location near where the herd spawns
-					Location spawnLocation = LocationHelper.getInstance().getRandomNearbyPosition(herdLocation, this.zombieMaximumDistance);
-					
+					Location spawnLocation = LocationHelper.getInstance().getRandomNearbyPosition(herdLocation,
+							this.zombieMaximumDistance);
+
 					// Spawn in a zombie
 					Zombie zombie = (Zombie) world.spawnEntity(spawnLocation, EntityType.ZOMBIE);
-					
+
 					// Spawn a particle effect for the zombie spawning
-					ParticleEmitter.getInstance().emitParticles(world, spawnLocation, Particle.CLOUD, 10, 0.1, new Vector(0, 0, 0));
-					
+					ParticleEmitter.getInstance().emitParticles(world, spawnLocation, Particle.CLOUD, 10, 0.1,
+							new Vector(0, 0, 0));
+
 					// Make the zombie target the player
 					zombie.setTarget(onlinePlayer);
-					
+
 					// Prepare a speed potion effect
 					PotionEffect speed = new PotionEffect(PotionEffectType.SPEED, 1000000, 1);
-					
+
 					// Apply the speed potion effect to the zombie
 					zombie.addPotionEffect(speed);
 				}

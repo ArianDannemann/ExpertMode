@@ -16,17 +16,20 @@ This plugin depends on the Plugin Base plugin.
 
 - Creepers are now much faster
 - Magma slimes will spawn in lava blocks if the player is near enough
-- Skeletons can shoot tipped arows
+- Skeletons can switch to a stone sword in close combat
 - Enderman 'scare' the player
 - If a player is killed by a zombie, his body becomes a zombie taking over the name and equipment from the player
 - Zombie pigmen attack players randomly
+- Wolfs attack players randomly
 - Phantoms are now invisible, leaving only a trail of particles behind
+- Drowned will now pull the player down if he's in a 5 block radius (both the drowned and the player have to be in water for this to work)
 
 ### Mechanics
 
 - Elytra don't work at night or during a storm
 - There is no natural regeneration
 - When a player dies, he will reviece a 30 minute cooldown
+- Darkness effect whenever the player moves around while not under blocks at night
 
 ### Events
 

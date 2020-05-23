@@ -28,23 +28,20 @@ public class Drowned extends Module {
 		super(main);
 	}
 
-	double drownedPullRadius = 5;						// the radius in which drowned can pull down the player
-	Vector drownedPullForce = new Vector(0, -0.5, 0);	// how much the drowned can pull down the player
-	
-	PotionEffect weakness =
-			new PotionEffect
-			(
-					PotionEffectType.WEAKNESS,			// type
-					10,									// duration
-					0,									// amplifier
-					true,								// ambient
-					false,								// particles
-					false								// icon
-			);
-	
+	double drownedPullRadius = 5; // the radius in which drowned can pull down the player
+	Vector drownedPullForce = new Vector(0, -0.5, 0); // how much the drowned can pull down the player
+
+	PotionEffect weakness = new PotionEffect(PotionEffectType.WEAKNESS, // type
+			10, // duration
+			0, // amplifier
+			true, // ambient
+			false, // particles
+			false // icon
+	);
+
 	@EventHandler
 	public void onPlayerMove(PlayerMoveEvent event) {
-		
+
 		// Get the player who moved
 		Player player = event.getPlayer();
 		// Get the players' location
@@ -53,92 +50,73 @@ public class Drowned extends Module {
 		World world = location.getWorld();
 		// Get the player block type as a lower case string
 		String playerLocationBlockType = player.getLocation().getBlock().getType().toString().toLowerCase();
-		
+
 		// Check if the player is in water
-		if
-		(
-				!playerLocationBlockType.contains("water")
-				&& !playerLocationBlockType.contains("sea")
-		) {
+		if (!playerLocationBlockType.contains("water") && !playerLocationBlockType.contains("sea")) {
 			return;
 		}
-		
+
 		// Loop through all nearby entities
-		for (Entity entity : player.getNearbyEntities(this.drownedPullRadius, this.drownedPullRadius, this.drownedPullRadius)) {
-			
+		for (Entity entity : player.getNearbyEntities(this.drownedPullRadius, this.drownedPullRadius,
+				this.drownedPullRadius)) {
+
 			// Get the entity block type as a lower case string
 			String entityLocationBlockType = entity.getLocation().getBlock().getType().toString().toLowerCase();
-			
+
 			/*
-			 *  Check if the entity is a drowned
-			 *  and if the drowned is under water
-			 *  and if the player is going up
-			 *  and if the player doesn't have a slow effect
+			 * Check if the entity is a drowned and if the drowned is under water and if the
+			 * player is going up and if the player doesn't have a slow effect
 			 */
-			if
-			(
-					entity.getType() == EntityType.DROWNED
-					&& (entityLocationBlockType.contains("water")
-					|| entityLocationBlockType.contains("sea"))
+			if (entity.getType() == EntityType.DROWNED
+					&& (entityLocationBlockType.contains("water") || entityLocationBlockType.contains("sea"))
 					&& event.getFrom().getY() < event.getTo().getY()
-					&& !player.hasPotionEffect(PotionEffectType.WEAKNESS)
-			) {
-				
+					&& !player.hasPotionEffect(PotionEffectType.WEAKNESS)) {
+
 				// Pull the player down
 				player.setVelocity(this.drownedPullForce);
-				
+
 				// Slow the player down for a short amount of time
 				player.addPotionEffect(this.weakness);
-				
+
 				// Player some water splash effect at the players' position
-				ParticleEmitter.getInstance().emitParticles
-				(
-						world,							// world
-						location,						// location
-						Particle.WATER_BUBBLE,			// particle
-						10,								// amount
-						0,								// speed
-						new Vector(0.5, 1, 0.5)			// spread
+				ParticleEmitter.getInstance().emitParticles(world, // world
+						location, // location
+						Particle.WATER_BUBBLE, // particle
+						10, // amount
+						0, // speed
+						new Vector(0.5, 1, 0.5) // spread
 				);
-				ParticleEmitter.getInstance().emitParticles
-				(
-						world,							// world
-						location,						// location
-						Particle.WATER_WAKE,			// particle
-						10,								// amount
-						0,								// speed
-						new Vector(0.5, 1, 0.5)			// spread
+				ParticleEmitter.getInstance().emitParticles(world, // world
+						location, // location
+						Particle.WATER_WAKE, // particle
+						10, // amount
+						0, // speed
+						new Vector(0.5, 1, 0.5) // spread
 				);
-			
+
 				// Play some sound effect at the players' location
-				SoundEmitter.getInstance().emitSound
-				(
-						world,							// world
-						location,						// location
-						Sound.ENTITY_ZOMBIE_CONVERTED_TO_DROWNED,// sound
-						SoundCategory.HOSTILE,			// sound category
-						1,								// volume
-						1								// pitch
+				SoundEmitter.getInstance().emitSound(world, // world
+						location, // location
+						Sound.ENTITY_ZOMBIE_CONVERTED_TO_DROWNED, // sound
+						SoundCategory.HOSTILE, // sound category
+						1, // volume
+						1 // pitch
 				);
-				
+
 				// Player some water splash effect at the drowneds position
-				ParticleEmitter.getInstance().emitParticles
-				(
-						world,							// world
-						entity.getLocation(),			// location
-						Particle.WATER_BUBBLE,			// particle
-						50,								// amount
-						0,								// speed
-						new Vector(2, 1, 2)			// spread
+				ParticleEmitter.getInstance().emitParticles(world, // world
+						entity.getLocation(), // location
+						Particle.WATER_BUBBLE, // particle
+						50, // amount
+						0, // speed
+						new Vector(2, 1, 2) // spread
 				);
-				ParticleEmitter.getInstance().emitParticles
-				(
-						world,							// world
-						entity.getLocation(),			// location
-						Particle.WATER_WAKE,			// particle
-						50,								// amount
-						0,								// speed
-						new Vector(2, 1, 2)			// spread
+				ParticleEmitter.getInstance().emitParticles(world, // world
+						entity.getLocation(), // location
+						Particle.WATER_WAKE, // particle
+						50, // amount
+						0, // speed
+						new Vector(2, 1, 2) // spread
 				);
 			}
 		}

@@ -48,7 +48,7 @@ public class Creeper extends Module {
 	public void onEntityExplode(EntityExplodeEvent event) {
 		
 		// Check if a creeper exploded
-		if (event.getEntity() instanceof Creeper == false) {
+		if (event.getEntity().getType() != EntityType.CREEPER) {
 			return;
 		}
 		
@@ -57,5 +57,11 @@ public class Creeper extends Module {
 		
 		// Remove the speed effect
 		livingEntity.removePotionEffect(PotionEffectType.SPEED);
+		
+		// Create a poison potion effect
+		PotionEffect poison = new PotionEffect(PotionEffectType.POISON, 600, 1, false, false);
+		
+		// Apply the poison potion effect to the entity
+		livingEntity.addPotionEffect(poison);
 	}
 }

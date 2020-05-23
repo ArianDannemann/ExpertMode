@@ -18,7 +18,7 @@ public class Main extends JavaPlugin {
 		new DifficultySetter(this);
 		new DamageAmplifier(this);
 		new PlayerHurt(this);
-
+		
 		// Mechanics
 		new ElytraBlocker(this);
 		new RegenerationBlocker(this);
@@ -37,9 +37,13 @@ public class Main extends JavaPlugin {
 		new Phantom(this);
 		new Drowned(this);
 		new Wolf(this);
+		new Squid(this);
 		
 		// Mixed stuff to mess with the player
 		new DarkerNight(this);
 		new JumpScare(this);
+		
+		// Test stuff
+		new WateryGoodness(this);
 	}
 }
