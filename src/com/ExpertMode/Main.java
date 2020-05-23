@@ -44,6 +44,6 @@ public class Main extends JavaPlugin {
 		new JumpScare(this);
 		
 		// Test stuff
-		new WateryGoodness(this);
+		//new WateryGoodness(this);
 	}
 }
