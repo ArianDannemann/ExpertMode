@@ -1,6 +1,7 @@
 package com.ExpertMode.Modules;
 
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -33,6 +34,8 @@ public class DarkerNight extends Module {
 					TimeHelper.getInstance().isNight(onlinePlayer.getWorld())
 					&& !LocationHelper.getInstance().isLocationUnderBlocks(onlinePlayer.getLocation())
 					&& !onlinePlayer.hasPotionEffect(PotionEffectType.BLINDNESS)
+					&& onlinePlayer.getGameMode() != GameMode.SPECTATOR
+					&& onlinePlayer.getGameMode() != GameMode.CREATIVE
 			) {
 				new Darkness(this.main, onlinePlayer);
 			}
