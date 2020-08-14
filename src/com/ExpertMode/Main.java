@@ -22,7 +22,7 @@ public class Main extends JavaPlugin {
 		// Mechanics
 		new ElytraBlocker(this);
 		new RegenerationBlocker(this);
-		new PlayerDeath(this);
+		//new PlayerDeath(this);
 		
 		// Events
 		new BloodMoon(this);
